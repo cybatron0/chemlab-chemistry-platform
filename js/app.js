@@ -38,12 +38,15 @@ function initNavigation() {
   });
 }
 
+// Standard academic positions: group (1-18) and period (1-7)
+// For our subset we map known elements to correct grid cells
 function initPeriodicTable() {
   const table = document.getElementById('periodic-table');
   const search = document.getElementById('element-search');
   const catFilter = document.getElementById('category-filter');
   const legend = document.getElementById('category-legend');
 
+  // Build legend
   Object.entries(CATEGORIES).forEach(([key, name]) => {
     const item = document.createElement('div');
     item.className = 'legend-item';
@@ -51,20 +54,51 @@ function initPeriodicTable() {
     legend.appendChild(item);
   });
 
+  // Create a full 18-column grid with 7 periods + space for lanthanides/actinides
+  // We place only the elements we have data for in their correct academic positions
+
+  // Map of symbol -> {col, row}  (1-based for CSS grid)
+  const positions = {
+    H:  {col:1, row:1}, He: {col:18, row:1},
+    Li: {col:1, row:2}, Be: {col:2, row:2}, B: {col:13, row:2}, C: {col:14, row:2}, N: {col:15, row:2}, O: {col:16, row:2}, F: {col:17, row:2}, Ne: {col:18, row:2},
+    Na: {col:1, row:3}, Mg: {col:2, row:3}, Al: {col:13, row:3}, Si: {col:14, row:3}, P: {col:15, row:3}, S: {col:16, row:3}, Cl: {col:17, row:3}, Ar: {col:18, row:3},
+    K:  {col:1, row:4}, Ca: {col:2, row:4}, Fe: {col:8, row:4}, Cu: {col:11, row:4}, Zn: {col:12, row:4}, Br: {col:17, row:4},
+    Ag: {col:11, row:5}, I: {col:17, row:5},
+    Au: {col:11, row:6}, Hg: {col:12, row:6}
+  };
+
+  // Create empty cells for the full grid first (7 periods x 18 groups)
+  for (let row = 1; row <= 7; row++) {
+    for (let col = 1; col <= 18; col++) {
+      const empty = document.createElement('div');
+      empty.className = 'element-empty';
+      empty.style.gridColumn = col;
+      empty.style.gridRow = row;
+      table.appendChild(empty);
+    }
+  }
+
+  // Place real elements on top of the correct positions
   ELEMENTS.forEach(el => {
+    const pos = positions[el.symbol];
+    if (!pos) return; // skip if no position defined
+
     const cell = document.createElement('div');
     cell.className = `element ${el.category}`;
     cell.dataset.symbol = el.symbol;
+    cell.style.gridColumn = pos.col;
+    cell.style.gridRow = pos.row;
     cell.innerHTML = `
       <span class="number">${el.num}</span>
       <span class="symbol">${el.symbol}</span>
-      <span class="mass">${el.mass.toFixed(2)}</span>
+      <span class="mass">${el.mass.toFixed(1)}</span>
     `;
     cell.addEventListener('click', () => showElementDetail(el));
     cell.addEventListener('mouseenter', () => showElementDetail(el));
     table.appendChild(cell);
   });
 
+  // Search
   search.addEventListener('input', () => {
     const q = search.value.toLowerCase().trim();
     document.querySelectorAll('.element').forEach(cell => {
@@ -75,6 +109,7 @@ function initPeriodicTable() {
     });
   });
 
+  // Category filter
   catFilter.addEventListener('change', () => {
     const cat = catFilter.value;
     document.querySelectorAll('.element').forEach(cell => {
@@ -82,7 +117,7 @@ function initPeriodicTable() {
         cell.style.opacity = '1';
         cell.style.pointerEvents = '';
       } else {
-        cell.style.opacity = '0.25';
+        cell.style.opacity = '0.2';
         cell.style.pointerEvents = 'none';
       }
     });
