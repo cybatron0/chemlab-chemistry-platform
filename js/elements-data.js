@@ -1,0 +1,43 @@
+const ELEMENTS = [
+  { num: 1, symbol: "H", name: "Hydrogen", mass: 1.008, category: "nonmetal", group: 1, period: 1, block: "s", state: "Gas", config: "1s¹", discovered: 1766, electronegativity: 2.20, atomicRadius: 53, ionizationEnergy: 1312, uses: "Fuel cells, ammonia production, rocket fuel" },
+  { num: 2, symbol: "He", name: "Helium", mass: 4.003, category: "noble-gas", group: 18, period: 1, block: "s", state: "Gas", config: "1s²", discovered: 1868, electronegativity: null, atomicRadius: 31, ionizationEnergy: 2372, uses: "Balloons, cryogenics, MRI magnets" },
+  { num: 3, symbol: "Li", name: "Lithium", mass: 6.941, category: "alkali-metal", group: 1, period: 2, block: "s", state: "Solid", config: "[He] 2s¹", discovered: 1817, electronegativity: 0.98, atomicRadius: 167, ionizationEnergy: 520, uses: "Rechargeable batteries, psychiatric medication" },
+  { num: 4, symbol: "Be", name: "Beryllium", mass: 9.012, category: "alkaline-earth", group: 2, period: 2, block: "s", state: "Solid", config: "[He] 2s²", discovered: 1798, electronegativity: 1.57, atomicRadius: 112, ionizationEnergy: 899, uses: "Aerospace alloys, X-ray windows" },
+  { num: 5, symbol: "B", name: "Boron", mass: 10.81, category: "metalloid", group: 13, period: 2, block: "p", state: "Solid", config: "[He] 2s² 2p¹", discovered: 1808, electronegativity: 2.04, atomicRadius: 87, ionizationEnergy: 801, uses: "Borosilicate glass, detergents, semiconductors" },
+  { num: 6, symbol: "C", name: "Carbon", mass: 12.011, category: "nonmetal", group: 14, period: 2, block: "p", state: "Solid", config: "[He] 2s² 2p²", discovered: "Ancient", electronegativity: 2.55, atomicRadius: 67, ionizationEnergy: 1086, uses: "Steel, plastics, life itself, pencils, diamonds" },
+  { num: 7, symbol: "N", name: "Nitrogen", mass: 14.007, category: "nonmetal", group: 15, period: 2, block: "p", state: "Gas", config: "[He] 2s² 2p³", discovered: 1772, electronegativity: 3.04, atomicRadius: 56, ionizationEnergy: 1402, uses: "Fertilizers, explosives, inert atmosphere" },
+  { num: 8, symbol: "O", name: "Oxygen", mass: 15.999, category: "nonmetal", group: 16, period: 2, block: "p", state: "Gas", config: "[He] 2s² 2p⁴", discovered: 1774, electronegativity: 3.44, atomicRadius: 48, ionizationEnergy: 1314, uses: "Respiration, steelmaking, water treatment" },
+  { num: 9, symbol: "F", name: "Fluorine", mass: 18.998, category: "halogen", group: 17, period: 2, block: "p", state: "Gas", config: "[He] 2s² 2p⁵", discovered: 1886, electronegativity: 3.98, atomicRadius: 42, ionizationEnergy: 1681, uses: "Toothpaste, Teflon, uranium enrichment" },
+  { num: 10, symbol: "Ne", name: "Neon", mass: 20.180, category: "noble-gas", group: 18, period: 2, block: "p", state: "Gas", config: "[He] 2s² 2p⁶", discovered: 1898, electronegativity: null, atomicRadius: 38, ionizationEnergy: 2081, uses: "Neon signs, lasers, cryogenics" },
+  { num: 11, symbol: "Na", name: "Sodium", mass: 22.990, category: "alkali-metal", group: 1, period: 3, block: "s", state: "Solid", config: "[Ne] 3s¹", discovered: 1807, electronegativity: 0.93, atomicRadius: 190, ionizationEnergy: 496, uses: "Table salt, street lamps, chemical synthesis" },
+  { num: 12, symbol: "Mg", name: "Magnesium", mass: 24.305, category: "alkaline-earth", group: 2, period: 3, block: "s", state: "Solid", config: "[Ne] 3s²", discovered: 1755, electronegativity: 1.31, atomicRadius: 145, ionizationEnergy: 738, uses: "Lightweight alloys, flares, dietary supplements" },
+  { num: 13, symbol: "Al", name: "Aluminum", mass: 26.982, category: "post-transition", group: 13, period: 3, block: "p", state: "Solid", config: "[Ne] 3s² 3p¹", discovered: 1825, electronegativity: 1.61, atomicRadius: 118, ionizationEnergy: 578, uses: "Aircraft, packaging, construction" },
+  { num: 14, symbol: "Si", name: "Silicon", mass: 28.086, category: "metalloid", group: 14, period: 3, block: "p", state: "Solid", config: "[Ne] 3s² 3p²", discovered: 1824, electronegativity: 1.90, atomicRadius: 111, ionizationEnergy: 787, uses: "Semiconductors, glass, solar panels" },
+  { num: 15, symbol: "P", name: "Phosphorus", mass: 30.974, category: "nonmetal", group: 15, period: 3, block: "p", state: "Solid", config: "[Ne] 3s² 3p³", discovered: 1669, electronegativity: 2.19, atomicRadius: 98, ionizationEnergy: 1012, uses: "Fertilizers, matches, DNA/RNA" },
+  { num: 16, symbol: "S", name: "Sulfur", mass: 32.065, category: "nonmetal", group: 16, period: 3, block: "p", state: "Solid", config: "[Ne] 3s² 3p⁴", discovered: "Ancient", electronegativity: 2.58, atomicRadius: 88, ionizationEnergy: 1000, uses: "Sulfuric acid, vulcanization, gunpowder" },
+  { num: 17, symbol: "Cl", name: "Chlorine", mass: 35.453, category: "halogen", group: 17, period: 3, block: "p", state: "Gas", config: "[Ne] 3s² 3p⁵", discovered: 1774, electronegativity: 3.16, atomicRadius: 79, ionizationEnergy: 1251, uses: "Disinfection, PVC, bleaching" },
+  { num: 18, symbol: "Ar", name: "Argon", mass: 39.948, category: "noble-gas", group: 18, period: 3, block: "p", state: "Gas", config: "[Ne] 3s² 3p⁶", discovered: 1894, electronegativity: null, atomicRadius: 71, ionizationEnergy: 1521, uses: "Welding, light bulbs, inert atmosphere" },
+  { num: 19, symbol: "K", name: "Potassium", mass: 39.098, category: "alkali-metal", group: 1, period: 4, block: "s", state: "Solid", config: "[Ar] 4s¹", discovered: 1807, electronegativity: 0.82, atomicRadius: 243, ionizationEnergy: 419, uses: "Fertilizers, soap, nerve function" },
+  { num: 20, symbol: "Ca", name: "Calcium", mass: 40.078, category: "alkaline-earth", group: 2, period: 4, block: "s", state: "Solid", config: "[Ar] 4s²", discovered: 1808, electronegativity: 1.00, atomicRadius: 194, ionizationEnergy: 590, uses: "Bones, cement, antacids" },
+  { num: 26, symbol: "Fe", name: "Iron", mass: 55.845, category: "transition-metal", group: 8, period: 4, block: "d", state: "Solid", config: "[Ar] 4s² 3d⁶", discovered: "Ancient", electronegativity: 1.83, atomicRadius: 156, ionizationEnergy: 762, uses: "Steel, hemoglobin, construction" },
+  { num: 29, symbol: "Cu", name: "Copper", mass: 63.546, category: "transition-metal", group: 11, period: 4, block: "d", state: "Solid", config: "[Ar] 4s¹ 3d¹⁰", discovered: "Ancient", electronegativity: 1.90, atomicRadius: 145, ionizationEnergy: 745, uses: "Wiring, plumbing, coins, alloys" },
+  { num: 30, symbol: "Zn", name: "Zinc", mass: 65.38, category: "transition-metal", group: 12, period: 4, block: "d", state: "Solid", config: "[Ar] 4s² 3d¹⁰", discovered: "Ancient", electronegativity: 1.65, atomicRadius: 142, ionizationEnergy: 906, uses: "Galvanizing, batteries, alloys" },
+  { num: 35, symbol: "Br", name: "Bromine", mass: 79.904, category: "halogen", group: 17, period: 4, block: "p", state: "Liquid", config: "[Ar] 4s² 3d¹⁰ 4p⁵", discovered: 1826, electronegativity: 2.96, atomicRadius: 94, ionizationEnergy: 1140, uses: "Flame retardants, pesticides, photography" },
+  { num: 47, symbol: "Ag", name: "Silver", mass: 107.868, category: "transition-metal", group: 11, period: 5, block: "d", state: "Solid", config: "[Kr] 5s¹ 4d¹⁰", discovered: "Ancient", electronegativity: 1.93, atomicRadius: 165, ionizationEnergy: 731, uses: "Jewelry, photography, electronics, antimicrobials" },
+  { num: 53, symbol: "I", name: "Iodine", mass: 126.90, category: "halogen", group: 17, period: 5, block: "p", state: "Solid", config: "[Kr] 5s² 4d¹⁰ 5p⁵", discovered: 1811, electronegativity: 2.66, atomicRadius: 115, ionizationEnergy: 1008, uses: "Disinfectants, thyroid hormone, photography" },
+  { num: 79, symbol: "Au", name: "Gold", mass: 196.97, category: "transition-metal", group: 11, period: 6, block: "d", state: "Solid", config: "[Xe] 6s¹ 4f¹⁴ 5d¹⁰", discovered: "Ancient", electronegativity: 2.54, atomicRadius: 174, ionizationEnergy: 890, uses: "Jewelry, electronics, finance, dentistry" },
+  { num: 80, symbol: "Hg", name: "Mercury", mass: 200.59, category: "transition-metal", group: 12, period: 6, block: "d", state: "Liquid", config: "[Xe] 6s² 4f¹⁴ 5d¹⁰", discovered: "Ancient", electronegativity: 2.00, atomicRadius: 171, ionizationEnergy: 1007, uses: "Thermometers (historical), fluorescent lamps, catalysis" }
+];
+
+const CATEGORIES = {
+  "alkali-metal": "Alkali Metal",
+  "alkaline-earth": "Alkaline Earth",
+  "transition-metal": "Transition Metal",
+  "post-transition": "Post-Transition Metal",
+  "metalloid": "Metalloid",
+  "nonmetal": "Nonmetal",
+  "halogen": "Halogen",
+  "noble-gas": "Noble Gas",
+  "lanthanide": "Lanthanide",
+  "actinide": "Actinide"
+};
