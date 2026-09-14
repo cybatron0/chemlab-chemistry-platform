@@ -1,0 +1,129 @@
+const REACTIONS = [
+  {
+    id: "na-cl",
+    reactants: ["Na", "Cl2"],
+    products: ["NaCl"],
+    equation: "2 Na(s) + Cl₂(g) → 2 NaCl(s)",
+    type: "Synthesis / Combination",
+    explanation: "Sodium metal reacts vigorously with chlorine gas to form sodium chloride (table salt).",
+    realWorld: "Bright yellow-orange flame, white smoke of salt crystals. Extremely exothermic and can be explosive if not controlled.",
+    safety: "Chlorine gas is highly toxic. Sodium is water-reactive. Perform only in fume hood with proper protection.",
+    visual: "Sodium atoms lose electrons to chlorine atoms, forming ionic Na⁺ and Cl⁻ which pack into a crystal lattice."
+  },
+  {
+    id: "hcl-naoh",
+    reactants: ["HCl", "NaOH"],
+    products: ["NaCl", "H2O"],
+    equation: "HCl(aq) + NaOH(aq) → NaCl(aq) + H₂O(l)",
+    type: "Acid-Base Neutralization",
+    explanation: "Strong acid and strong base neutralize each other to form a salt and water.",
+    realWorld: "Solution temperature rises (exothermic). Phenolphthalein indicator changes from pink to colorless at endpoint.",
+    safety: "Both HCl and NaOH are corrosive. Wear goggles and gloves.",
+    visual: "H⁺ from acid combines with OH⁻ from base to form water molecules."
+  },
+  {
+    id: "zn-hcl",
+    reactants: ["Zn", "HCl"],
+    products: ["ZnCl2", "H2"],
+    equation: "Zn(s) + 2 HCl(aq) → ZnCl₂(aq) + H₂(g)",
+    type: "Single Displacement / Redox",
+    explanation: "Zinc metal displaces hydrogen from hydrochloric acid.",
+    realWorld: "Bubbles of hydrogen gas form vigorously. Zinc dissolves. Solution may warm up.",
+    safety: "Hydrogen gas is flammable. Perform away from flames. Acid is corrosive.",
+    visual: "Zinc atoms oxidize to Zn²⁺, H⁺ ions reduce to H₂ gas."
+  },
+  {
+    id: "agno3-nacl",
+    reactants: ["AgNO3", "NaCl"],
+    products: ["AgCl", "NaNO3"],
+    equation: "AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq)",
+    type: "Double Displacement / Precipitation",
+    explanation: "Silver ions and chloride ions form insoluble silver chloride precipitate.",
+    realWorld: "White cloudy precipitate of AgCl forms immediately and darkens on exposure to light.",
+    safety: "Silver nitrate stains skin and is toxic. Avoid contact.",
+    visual: "Ag⁺ and Cl⁻ ions combine to form solid AgCl lattice; Na⁺ and NO₃⁻ remain dissolved."
+  },
+  {
+    id: "ch4-o2",
+    reactants: ["CH4", "O2"],
+    products: ["CO2", "H2O"],
+    equation: "CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(g)",
+    type: "Combustion",
+    explanation: "Methane burns completely in oxygen to produce carbon dioxide and water vapor.",
+    realWorld: "Blue flame, heat and light released. Used in stoves and Bunsen burners.",
+    safety: "Methane is flammable and can form explosive mixtures with air.",
+    visual: "C–H and O=O bonds break; new C=O and O–H bonds form, releasing energy."
+  },
+  {
+    id: "caco3-heat",
+    reactants: ["CaCO3"],
+    products: ["CaO", "CO2"],
+    equation: "CaCO₃(s) → CaO(s) + CO₂(g)",
+    type: "Thermal Decomposition",
+    explanation: "Calcium carbonate decomposes on strong heating into calcium oxide and carbon dioxide.",
+    realWorld: "White solid remains (quicklime). Gas evolves that turns limewater milky.",
+    safety: "High temperatures required. CO₂ can displace oxygen in confined spaces.",
+    visual: "Heat provides energy to break the carbonate into oxide and CO₂ gas."
+  },
+  {
+    id: "h2-o2",
+    reactants: ["H2", "O2"],
+    products: ["H2O"],
+    equation: "2 H₂(g) + O₂(g) → 2 H₂O(g)",
+    type: "Synthesis / Combustion",
+    explanation: "Hydrogen and oxygen combine explosively to form water.",
+    realWorld: "Loud pop or explosion with a pale blue flame. Classic test for hydrogen gas.",
+    safety: "Extremely explosive mixture. Never ignite large volumes.",
+    visual: "H–H and O=O bonds break; new O–H bonds form in water molecules."
+  },
+  {
+    id: "fe-o2",
+    reactants: ["Fe", "O2"],
+    products: ["Fe2O3"],
+    equation: "4 Fe(s) + 3 O₂(g) → 2 Fe₂O₃(s)",
+    type: "Synthesis / Oxidation",
+    explanation: "Iron reacts with oxygen (often in presence of water) to form iron(III) oxide — rust.",
+    realWorld: "Reddish-brown flaky rust forms slowly on iron surfaces exposed to air and moisture.",
+    safety: "Generally slow at room temperature. Fine iron powder can be pyrophoric.",
+    visual: "Iron atoms oxidize; oxygen reduces. Oxide layer forms on the metal surface."
+  },
+  {
+    id: "cu-agno3",
+    reactants: ["Cu", "AgNO3"],
+    products: ["CuNO3", "Ag"],
+    equation: "Cu(s) + 2 AgNO₃(aq) → Cu(NO₃)₂(aq) + 2 Ag(s)",
+    type: "Single Displacement / Redox",
+    explanation: "Copper is more reactive than silver and displaces it from silver nitrate solution.",
+    realWorld: "Silver crystals or grey coating form on the copper surface. Solution turns blue.",
+    safety: "Silver nitrate is toxic and staining.",
+    visual: "Cu atoms oxidize to Cu²⁺; Ag⁺ ions reduce to metallic silver."
+  },
+  {
+    id: "h2so4-naoh",
+    reactants: ["H2SO4", "NaOH"],
+    products: ["Na2SO4", "H2O"],
+    equation: "H₂SO₄(aq) + 2 NaOH(aq) → Na₂SO₄(aq) + 2 H₂O(l)",
+    type: "Acid-Base Neutralization",
+    explanation: "Sulfuric acid is neutralized by sodium hydroxide.",
+    realWorld: "Significant heat released. Used in titration with indicators.",
+    safety: "Both reagents are highly corrosive. Always add acid to water, never reverse.",
+    visual: "H⁺ ions combine with OH⁻ to form water; Na⁺ and SO₄²⁻ form the salt."
+  }
+];
+
+const REACTANT_OPTIONS = [
+  { id: "Na", label: "Sodium (Na)" },
+  { id: "Cl2", label: "Chlorine (Cl₂)" },
+  { id: "HCl", label: "Hydrochloric acid (HCl)" },
+  { id: "NaOH", label: "Sodium hydroxide (NaOH)" },
+  { id: "Zn", label: "Zinc (Zn)" },
+  { id: "AgNO3", label: "Silver nitrate (AgNO₃)" },
+  { id: "NaCl", label: "Sodium chloride (NaCl)" },
+  { id: "CH4", label: "Methane (CH₄)" },
+  { id: "O2", label: "Oxygen (O₂)" },
+  { id: "CaCO3", label: "Calcium carbonate (CaCO₃)" },
+  { id: "H2", label: "Hydrogen (H₂)" },
+  { id: "Fe", label: "Iron (Fe)" },
+  { id: "Cu", label: "Copper (Cu)" },
+  { id: "H2SO4", label: "Sulfuric acid (H₂SO₄)" }
+];
