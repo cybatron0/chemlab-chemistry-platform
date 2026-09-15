@@ -108,6 +108,116 @@ const REACTIONS = [
     realWorld: "Significant heat released. Used in titration with indicators.",
     safety: "Both reagents are highly corrosive. Always add acid to water, never reverse.",
     visual: "H⁺ ions combine with OH⁻ to form water; Na⁺ and SO₄²⁻ form the salt."
+  },
+  {
+    id: "mg-o2",
+    reactants: ["Mg", "O2"],
+    products: ["MgO"],
+    equation: "2 Mg(s) + O₂(g) → 2 MgO(s)",
+    type: "Synthesis / Combustion",
+    explanation: "Magnesium burns in air or oxygen with an intense white light to form magnesium oxide.",
+    realWorld: "Brilliant white flame, white powdery residue of MgO.",
+    safety: "Intense light can damage eyes. Do not look directly at the flame. Magnesium ribbon is highly flammable.",
+    visual: "Magnesium atoms lose electrons to oxygen, forming ionic MgO lattice."
+  },
+  {
+    id: "na-h2o",
+    reactants: ["Na", "H2O"],
+    products: ["NaOH", "H2"],
+    equation: "2 Na(s) + 2 H₂O(l) → 2 NaOH(aq) + H₂(g)",
+    type: "Single Displacement / Redox",
+    explanation: "Sodium reacts vigorously with water to produce sodium hydroxide and hydrogen gas.",
+    realWorld: "Metal skates on surface, melts into a ball, hisses, may ignite hydrogen (yellow flame).",
+    safety: "Extremely vigorous. Use tiny pieces only. Hydrogen can ignite. Eye protection essential.",
+    visual: "Na atoms oxidize; water is reduced, releasing H₂."
+  },
+  {
+    id: "caco3-hcl",
+    reactants: ["CaCO3", "HCl"],
+    products: ["CaCl2", "CO2", "H2O"],
+    equation: "CaCO₃(s) + 2 HCl(aq) → CaCl₂(aq) + CO₂(g) + H₂O(l)",
+    type: "Acid-Carbonate",
+    explanation: "Carbonate reacts with acid to liberate carbon dioxide.",
+    realWorld: "Fizzing / effervescence as CO₂ is evolved. Solid dissolves.",
+    safety: "Acid is corrosive. CO₂ is an asphyxiant in high concentration.",
+    visual: "Carbonate ions react with H⁺ to form H₂CO₃ which decomposes to CO₂ + H₂O."
+  },
+  {
+    id: "fe-hcl",
+    reactants: ["Fe", "HCl"],
+    products: ["FeCl2", "H2"],
+    equation: "Fe(s) + 2 HCl(aq) → FeCl₂(aq) + H₂(g)",
+    type: "Single Displacement / Redox",
+    explanation: "Iron displaces hydrogen from hydrochloric acid.",
+    realWorld: "Bubbles of hydrogen; solution turns pale green (Fe²⁺).",
+    safety: "Hydrogen is flammable. Acid is corrosive.",
+    visual: "Fe → Fe²⁺ + 2e⁻; 2H⁺ + 2e⁻ → H₂."
+  },
+  {
+    id: "cuo-h2",
+    reactants: ["CuO", "H2"],
+    products: ["Cu", "H2O"],
+    equation: "CuO(s) + H₂(g) → Cu(s) + H₂O(g)",
+    type: "Redox / Reduction",
+    explanation: "Hydrogen reduces copper(II) oxide to copper metal.",
+    realWorld: "Black CuO turns to reddish-brown copper; steam is produced.",
+    safety: "Hydrogen is flammable. Perform with care.",
+    visual: "Oxygen is removed from CuO; copper ions are reduced to atoms."
+  },
+  {
+    id: "nh3-hcl",
+    reactants: ["NH3", "HCl"],
+    products: ["NH4Cl"],
+    equation: "NH₃(g) + HCl(g) → NH₄Cl(s)",
+    type: "Acid-Base / Synthesis",
+    explanation: "Ammonia and hydrogen chloride gases combine to form solid ammonium chloride.",
+    realWorld: "White smoke / solid ring of NH₄Cl forms where the gases meet (classic diffusion demo).",
+    safety: "Both gases are irritant. Perform in fume cupboard or with care.",
+    visual: "NH₃ accepts a proton from HCl forming the ionic salt NH₄⁺Cl⁻."
+  },
+  {
+    id: "k-h2o",
+    reactants: ["K", "H2O"],
+    products: ["KOH", "H2"],
+    equation: "2 K(s) + 2 H₂O(l) → 2 KOH(aq) + H₂(g)",
+    type: "Single Displacement / Redox",
+    explanation: "Potassium reacts even more vigorously than sodium with water.",
+    realWorld: "Lilac flame as hydrogen ignites; metal moves rapidly on surface.",
+    safety: "Very vigorous and hazardous. Use only under specialist supervision with tiny amounts.",
+    visual: "K atoms oxidize readily; water is reduced to H₂."
+  },
+  {
+    id: "al-hcl",
+    reactants: ["Al", "HCl"],
+    products: ["AlCl3", "H2"],
+    equation: "2 Al(s) + 6 HCl(aq) → 2 AlCl₃(aq) + 3 H₂(g)",
+    type: "Single Displacement / Redox",
+    explanation: "Aluminium reacts with hydrochloric acid to liberate hydrogen.",
+    realWorld: "Bubbles form after an induction period (oxide layer). Solution may warm.",
+    safety: "Hydrogen is flammable. Acid is corrosive.",
+    visual: "Al → Al³⁺ + 3e⁻; H⁺ reduced to H₂."
+  },
+  {
+    id: "pbno3-ki",
+    reactants: ["PbNO3", "KI"],
+    products: ["PbI2", "KNO3"],
+    equation: "Pb(NO₃)₂(aq) + 2 KI(aq) → PbI₂(s) + 2 KNO₃(aq)",
+    type: "Double Displacement / Precipitation",
+    explanation: "Lead(II) ions and iodide ions form bright yellow lead(II) iodide precipitate.",
+    realWorld: "Striking yellow precipitate ("golden rain" when recrystallised).",
+    safety: "Lead compounds are toxic. Avoid contact and dispose of properly.",
+    visual: "Pb²⁺ and I⁻ form the insoluble yellow solid PbI₂."
+  },
+  {
+    id: "h2so4-caco3",
+    reactants: ["H2SO4", "CaCO3"],
+    products: ["CaSO4", "CO2", "H2O"],
+    equation: "H₂SO₄(aq) + CaCO₃(s) → CaSO₄(s) + CO₂(g) + H₂O(l)",
+    type: "Acid-Carbonate",
+    explanation: "Sulfuric acid reacts with calcium carbonate producing sparingly soluble calcium sulfate.",
+    realWorld: "Initial fizzing; reaction may slow as CaSO₄ coats the carbonate.",
+    safety: "Concentrated H₂SO₄ is extremely corrosive. Dilute carefully.",
+    visual: "Carbonate + acid → salt + CO₂ + water."
   }
 ];
 
@@ -125,5 +235,13 @@ const REACTANT_OPTIONS = [
   { id: "H2", label: "Hydrogen (H₂)" },
   { id: "Fe", label: "Iron (Fe)" },
   { id: "Cu", label: "Copper (Cu)" },
-  { id: "H2SO4", label: "Sulfuric acid (H₂SO₄)" }
+  { id: "H2SO4", label: "Sulfuric acid (H₂SO₄)" },
+  { id: "Mg", label: "Magnesium (Mg)" },
+  { id: "H2O", label: "Water (H₂O)" },
+  { id: "CuO", label: "Copper(II) oxide (CuO)" },
+  { id: "NH3", label: "Ammonia (NH₃)" },
+  { id: "K", label: "Potassium (K)" },
+  { id: "Al", label: "Aluminium (Al)" },
+  { id: "PbNO3", label: "Lead(II) nitrate (Pb(NO₃)₂)" },
+  { id: "KI", label: "Potassium iodide (KI)" }
 ];
