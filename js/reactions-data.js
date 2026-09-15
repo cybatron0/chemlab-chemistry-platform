@@ -204,7 +204,7 @@ const REACTIONS = [
     equation: "Pb(NO₃)₂(aq) + 2 KI(aq) → PbI₂(s) + 2 KNO₃(aq)",
     type: "Double Displacement / Precipitation",
     explanation: "Lead(II) ions and iodide ions form bright yellow lead(II) iodide precipitate.",
-    realWorld: "Striking yellow precipitate ("golden rain" when recrystallised).",
+    realWorld: "Striking yellow precipitate (known as golden rain when recrystallised).",
     safety: "Lead compounds are toxic. Avoid contact and dispose of properly.",
     visual: "Pb²⁺ and I⁻ form the insoluble yellow solid PbI₂."
   },
