@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChemLab — Interactive Chemistry Learning Platform</title>
-  <meta name="description" content="Free interactive chemistry learning platform: periodic table, reaction simulator, calculators, lessons and glossary. Pure client-side, no account needed." />
+  <meta name="description" content="Free interactive chemistry learning platform: periodic table, reaction simulator with any element, dot-and-cross diagrams, calculators, long-form lessons and glossary." />
   <meta name="theme-color" content="#4f46e5" />
-  <meta name="keywords" content="chemistry, periodic table, reaction simulator, molarity, stoichiometry, e-learning, A-level chemistry" />
+  <meta name="keywords" content="chemistry, periodic table, reaction simulator, dot and cross, molarity, stoichiometry, e-learning, A-level chemistry" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
@@ -64,19 +64,20 @@
       <section id="section-simulator" class="section" aria-labelledby="sim-heading">
         <div class="section-header">
           <h1 id="sim-heading">Reaction Simulator</h1>
-          <p class="subtitle">Select reactants and discover what happens</p>
+          <p class="subtitle">Choose any element or compound — run the reaction and explore equation, observation, visual and <strong>dot-and-cross</strong> views</p>
         </div>
         <div class="simulator-layout">
           <div class="reactant-picker">
-            <h3>Available Reactants</h3>
+            <h3>Choose Reactants</h3>
+            <input type="text" id="reactant-search" placeholder="Search any element or compound..." class="search-input" style="width:100%;margin-bottom:0.75rem;" aria-label="Search reactants" />
             <div class="reactant-list" id="reactant-list" role="listbox" aria-label="Reactant list"></div>
           </div>
           <div class="reaction-chamber">
             <h3>Reaction Chamber</h3>
             <div class="chamber-slots" id="chamber-slots">
-              <div class="slot" data-slot="0" aria-label="First reactant slot">Drop reactant here</div>
+              <div class="slot" data-slot="0" aria-label="First reactant slot">Select first reactant</div>
               <div class="plus" aria-hidden="true">+</div>
-              <div class="slot" data-slot="1" aria-label="Second reactant slot">Drop reactant here</div>
+              <div class="slot" data-slot="1" aria-label="Second reactant slot">Select second reactant</div>
             </div>
             <button id="run-reaction" class="primary-btn" disabled>Run Reaction</button>
             <button id="clear-chamber" class="secondary-btn">Clear</button>
@@ -86,16 +87,17 @@
           </div>
         </div>
         <div class="mode-tabs" id="result-modes" style="display:none;" role="tablist">
-          <button class="mode-btn active" data-mode="equation" role="tab">Equation Mode</button>
-          <button class="mode-btn" data-mode="realworld" role="tab">Real-World Mode</button>
-          <button class="mode-btn" data-mode="visual" role="tab">Visual Mode</button>
+          <button class="mode-btn active" data-mode="equation" role="tab">Equation</button>
+          <button class="mode-btn" data-mode="realworld" role="tab">Real-World</button>
+          <button class="mode-btn" data-mode="visual" role="tab">Visual</button>
+          <button class="mode-btn" data-mode="dotcross" role="tab">Dot & Cross</button>
         </div>
       </section>
 
       <section id="section-lessons" class="section" aria-labelledby="lessons-heading">
         <div class="section-header">
           <h1 id="lessons-heading">Structured Lessons</h1>
-          <p class="subtitle">Learn chemistry step by step</p>
+          <p class="subtitle">In-depth modules — longer explanations, key ideas and worked examples</p>
         </div>
         <div class="modules-grid" id="modules-grid"></div>
         <div id="lesson-content" class="lesson-content" style="display:none;"></div>
