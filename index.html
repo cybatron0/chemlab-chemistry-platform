@@ -4,39 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChemLab — Interactive Chemistry Learning Platform</title>
+  <meta name="description" content="Free interactive chemistry learning platform: periodic table, reaction simulator, calculators, lessons and glossary. Pure client-side, no account needed." />
+  <meta name="theme-color" content="#4f46e5" />
+  <meta name="keywords" content="chemistry, periodic table, reaction simulator, molarity, stoichiometry, e-learning, A-level chemistry" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <div id="app">
-    <header class="header">
+    <header class="header" role="banner">
       <div class="logo">
-        <span class="logo-icon">⚗</span>
+        <span class="logo-icon" aria-hidden="true">⚗</span>
         <span class="logo-text">ChemLab</span>
       </div>
-      <nav class="nav">
-        <button class="nav-btn active" data-section="periodic">Periodic Table</button>
+      <nav class="nav" role="navigation" aria-label="Main">
+        <button class="nav-btn active" data-section="periodic" aria-current="page">Periodic Table</button>
         <button class="nav-btn" data-section="simulator">Reaction Simulator</button>
         <button class="nav-btn" data-section="lessons">Lessons</button>
         <button class="nav-btn" data-section="tools">Tools</button>
         <button class="nav-btn" data-section="glossary">Glossary</button>
       </nav>
       <div class="header-actions">
-        <button id="theme-toggle" class="icon-btn" title="Toggle dark/light mode">🌓</button>
-        <div class="xp-display" title="Your XP">
-          <span>⭐</span> <span id="xp-value">0</span> XP
+        <button id="theme-toggle" class="icon-btn" title="Toggle dark/light mode" aria-label="Toggle dark or light mode">🌓</button>
+        <div class="xp-display" title="Your XP" aria-live="polite">
+          <span aria-hidden="true">⭐</span> <span id="xp-value">0</span> XP
         </div>
       </div>
     </header>
 
-    <main class="main">
-      <section id="section-periodic" class="section active">
+    <main class="main" role="main">
+      <section id="section-periodic" class="section active" aria-labelledby="periodic-heading">
         <div class="section-header">
-          <h1>Interactive Periodic Table</h1>
+          <h1 id="periodic-heading">Interactive Periodic Table</h1>
           <div class="controls">
-            <input type="text" id="element-search" placeholder="Search element..." class="search-input" />
-            <select id="category-filter" class="select">
+            <input type="text" id="element-search" placeholder="Search element..." class="search-input" aria-label="Search elements by name, symbol or number" />
+            <select id="category-filter" class="select" aria-label="Filter by category">
               <option value="all">All Categories</option>
               <option value="alkali-metal">Alkali Metals</option>
               <option value="alkaline-earth">Alkaline Earth</option>
@@ -50,107 +53,107 @@
           </div>
         </div>
         <div class="periodic-layout">
-          <div id="periodic-table" class="periodic-table"></div>
-          <div id="element-detail" class="element-detail">
+          <div id="periodic-table" class="periodic-table" role="grid" aria-label="Periodic table of elements"></div>
+          <div id="element-detail" class="element-detail" aria-live="polite">
             <div class="detail-placeholder"><p>Click or hover an element to see details</p></div>
           </div>
         </div>
-        <div class="legend" id="category-legend"></div>
+        <div class="legend" id="category-legend" aria-label="Category legend"></div>
       </section>
 
-      <section id="section-simulator" class="section">
+      <section id="section-simulator" class="section" aria-labelledby="sim-heading">
         <div class="section-header">
-          <h1>Reaction Simulator</h1>
+          <h1 id="sim-heading">Reaction Simulator</h1>
           <p class="subtitle">Select reactants and discover what happens</p>
         </div>
         <div class="simulator-layout">
           <div class="reactant-picker">
             <h3>Available Reactants</h3>
-            <div class="reactant-list" id="reactant-list"></div>
+            <div class="reactant-list" id="reactant-list" role="listbox" aria-label="Reactant list"></div>
           </div>
           <div class="reaction-chamber">
             <h3>Reaction Chamber</h3>
             <div class="chamber-slots" id="chamber-slots">
-              <div class="slot" data-slot="0">Drop reactant here</div>
-              <div class="plus">+</div>
-              <div class="slot" data-slot="1">Drop reactant here</div>
+              <div class="slot" data-slot="0" aria-label="First reactant slot">Drop reactant here</div>
+              <div class="plus" aria-hidden="true">+</div>
+              <div class="slot" data-slot="1" aria-label="Second reactant slot">Drop reactant here</div>
             </div>
             <button id="run-reaction" class="primary-btn" disabled>Run Reaction</button>
             <button id="clear-chamber" class="secondary-btn">Clear</button>
           </div>
-          <div class="reaction-result" id="reaction-result">
+          <div class="reaction-result" id="reaction-result" aria-live="polite">
             <div class="result-placeholder"><p>Select two reactants and click Run Reaction</p></div>
           </div>
         </div>
-        <div class="mode-tabs" id="result-modes" style="display:none;">
-          <button class="mode-btn active" data-mode="equation">Equation Mode</button>
-          <button class="mode-btn" data-mode="realworld">Real-World Mode</button>
-          <button class="mode-btn" data-mode="visual">Visual Mode</button>
+        <div class="mode-tabs" id="result-modes" style="display:none;" role="tablist">
+          <button class="mode-btn active" data-mode="equation" role="tab">Equation Mode</button>
+          <button class="mode-btn" data-mode="realworld" role="tab">Real-World Mode</button>
+          <button class="mode-btn" data-mode="visual" role="tab">Visual Mode</button>
         </div>
       </section>
 
-      <section id="section-lessons" class="section">
+      <section id="section-lessons" class="section" aria-labelledby="lessons-heading">
         <div class="section-header">
-          <h1>Structured Lessons</h1>
+          <h1 id="lessons-heading">Structured Lessons</h1>
           <p class="subtitle">Learn chemistry step by step</p>
         </div>
         <div class="modules-grid" id="modules-grid"></div>
         <div id="lesson-content" class="lesson-content" style="display:none;"></div>
       </section>
 
-      <section id="section-tools" class="section">
-        <div class="section-header"><h1>Handy Chemistry Tools</h1></div>
+      <section id="section-tools" class="section" aria-labelledby="tools-heading">
+        <div class="section-header"><h1 id="tools-heading">Handy Chemistry Tools</h1></div>
         <div class="tools-grid">
           <div class="tool-card">
             <h3>Molarity Calculator</h3>
             <div class="tool-form">
-              <label>Moles of solute <input type="number" id="mol-solute" step="any"></label>
-              <label>Volume (L) <input type="number" id="vol-solution" step="any"></label>
+              <label>Moles of solute <input type="number" id="mol-solute" step="any" inputmode="decimal"></label>
+              <label>Volume (L) <input type="number" id="vol-solution" step="any" inputmode="decimal"></label>
               <button onclick="calcMolarity()" class="primary-btn">Calculate</button>
-              <p id="molarity-result" class="result-text"></p>
+              <p id="molarity-result" class="result-text" aria-live="polite"></p>
             </div>
           </div>
           <div class="tool-card">
             <h3>Stoichiometry Helper</h3>
             <div class="tool-form">
-              <label>Mass (g) <input type="number" id="stoich-mass" step="any"></label>
-              <label>Molar Mass (g/mol) <input type="number" id="stoich-mm" step="any"></label>
+              <label>Mass (g) <input type="number" id="stoich-mass" step="any" inputmode="decimal"></label>
+              <label>Molar Mass (g/mol) <input type="number" id="stoich-mm" step="any" inputmode="decimal"></label>
               <button onclick="calcMoles()" class="primary-btn">Grams → Moles</button>
-              <p id="stoich-result" class="result-text"></p>
+              <p id="stoich-result" class="result-text" aria-live="polite"></p>
             </div>
           </div>
           <div class="tool-card">
             <h3>Unit Converter</h3>
             <div class="tool-form">
-              <label>Temperature (°C) <input type="number" id="temp-c" step="any"></label>
+              <label>Temperature (°C) <input type="number" id="temp-c" step="any" inputmode="decimal"></label>
               <button onclick="convertTemp()" class="primary-btn">Convert to K & °F</button>
-              <p id="temp-result" class="result-text"></p>
+              <p id="temp-result" class="result-text" aria-live="polite"></p>
             </div>
           </div>
           <div class="tool-card">
             <h3>Dilution Calculator (C₁V₁ = C₂V₂)</h3>
             <div class="tool-form">
-              <label>C₁ <input type="number" id="c1" step="any"></label>
-              <label>V₁ <input type="number" id="v1" step="any"></label>
-              <label>C₂ <input type="number" id="c2" step="any"></label>
+              <label>C₁ <input type="number" id="c1" step="any" inputmode="decimal"></label>
+              <label>V₁ <input type="number" id="v1" step="any" inputmode="decimal"></label>
+              <label>C₂ <input type="number" id="c2" step="any" inputmode="decimal"></label>
               <button onclick="calcDilution()" class="primary-btn">Find V₂</button>
-              <p id="dilution-result" class="result-text"></p>
+              <p id="dilution-result" class="result-text" aria-live="polite"></p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="section-glossary" class="section">
+      <section id="section-glossary" class="section" aria-labelledby="glossary-heading">
         <div class="section-header">
-          <h1>Chemistry Glossary</h1>
-          <input type="text" id="glossary-search" placeholder="Search terms..." class="search-input" />
+          <h1 id="glossary-heading">Chemistry Glossary</h1>
+          <input type="text" id="glossary-search" placeholder="Search terms..." class="search-input" aria-label="Search glossary" />
         </div>
         <div id="glossary-list" class="glossary-list"></div>
       </section>
     </main>
 
-    <footer class="footer">
-      <p>ChemLab — Interactive Chemistry Platform • Built for learning • Safety first</p>
+    <footer class="footer" role="contentinfo">
+      <p>ChemLab — Interactive Chemistry Platform • Built for learning • Safety first • Simulation only</p>
     </footer>
   </div>
 
