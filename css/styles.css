@@ -110,7 +110,6 @@ body {
 .periodic-layout { display: grid; grid-template-columns: 1fr 300px; gap: 1.5rem; }
 @media (max-width: 1100px) { .periodic-layout { grid-template-columns: 1fr; } }
 
-/* PROPER ACADEMIC PERIODIC TABLE - 18 columns */
 .periodic-table {
   display: grid;
   grid-template-columns: repeat(18, minmax(0, 1fr));
@@ -143,7 +142,6 @@ body {
 .element .symbol { font-weight: 700; font-size: 0.9rem; line-height: 1.1; }
 .element .mass { font-size: 0.5rem; opacity: 0.85; }
 
-/* Empty placeholder cells */
 .element-empty {
   aspect-ratio: 1;
   min-height: 42px;
@@ -194,7 +192,7 @@ body {
 .legend-item { display: flex; align-items: center; gap: 0.35rem; }
 .legend-swatch { width: 14px; height: 14px; border-radius: 4px; }
 
-.simulator-layout { display: grid; grid-template-columns: 220px 1fr 1fr; gap: 1.25rem; }
+.simulator-layout { display: grid; grid-template-columns: 240px 1fr 1fr; gap: 1.25rem; }
 @media (max-width: 900px) { .simulator-layout { grid-template-columns: 1fr; } }
 .reactant-picker, .reaction-chamber, .reaction-result {
   background: var(--surface);
@@ -203,7 +201,7 @@ body {
   padding: 1rem;
   box-shadow: var(--shadow);
 }
-.reactant-list { display: flex; flex-direction: column; gap: 0.4rem; max-height: 400px; overflow-y: auto; margin-top: 0.75rem; }
+.reactant-list { display: flex; flex-direction: column; gap: 0.4rem; max-height: 380px; overflow-y: auto; margin-top: 0.5rem; }
 .reactant-item {
   padding: 0.5rem 0.75rem;
   background: var(--bg);
@@ -266,6 +264,69 @@ body {
 }
 [data-theme="dark"] .safety-note { background: #78350f; color: #fde68a; }
 
+/* Dot-and-cross diagrams */
+.dotcross-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: 1.25rem 0;
+}
+.dotcross-atom {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  text-align: center;
+  min-width: 110px;
+}
+.dotcross-atom .atom-symbol {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+.dotcross-atom .electrons {
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  min-height: 1.4em;
+}
+.dotcross-atom .dot { color: var(--primary); }
+.dotcross-atom .cross { color: var(--danger); font-weight: 700; }
+.dotcross-atom .atom-label {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.dotcross-grid .arrow {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.dotcross-result {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.lesson-body h4 {
+  margin: 1.25rem 0 0.5rem;
+  color: var(--primary);
+}
+.lesson-body ul, .lesson-body ol {
+  margin: 0.5rem 0 0.75rem 1.25rem;
+}
+.lesson-body p { margin-bottom: 0.75rem; }
+.lesson-body code {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
 .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
 .module-card {
   background: var(--surface);
@@ -319,7 +380,6 @@ body {
   margin-top: 2rem;
 }
 
-/* Mobile refinements */
 @media (max-width: 640px) {
   .header { padding: 0.75rem 1rem; }
   .nav-btn { padding: 0.4rem 0.6rem; font-size: 0.85rem; }
