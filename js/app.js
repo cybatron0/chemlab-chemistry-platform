@@ -17,11 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
 function initTheme() {
   const saved = localStorage.getItem('chemlab-theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
-  document.getElementById('theme-toggle').addEventListener('click', () => {
+  const btn = document.getElementById('theme-toggle');
+  btn.setAttribute('aria-label', saved === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  btn.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('chemlab-theme', next);
+    btn.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
   });
 }
 
@@ -44,46 +47,59 @@ function initPeriodicTable() {
   const catFilter = document.getElementById('category-filter');
   const legend = document.getElementById('category-legend');
 
+  // Build legend
   Object.entries(CATEGORIES).forEach(([key, name]) => {
     const item = document.createElement('div');
     item.className = 'legend-item';
-    item.innerHTML = `<span class="legend-swatch ${key}"></span> ${name}`;
+    item.innerHTML = `<span class="legend-swatch ${key}" aria-hidden="true"></span> ${name}`;
     legend.appendChild(item);
   });
 
-  const positions = {
-    H:  {col:1, row:1}, He: {col:18, row:1},
-    Li: {col:1, row:2}, Be: {col:2, row:2}, B: {col:13, row:2}, C: {col:14, row:2}, N: {col:15, row:2}, O: {col:16, row:2}, F: {col:17, row:2}, Ne: {col:18, row:2},
-    Na: {col:1, row:3}, Mg: {col:2, row:3}, Al: {col:13, row:3}, Si: {col:14, row:3}, P: {col:15, row:3}, S: {col:16, row:3}, Cl: {col:17, row:3}, Ar: {col:18, row:3},
-    K:  {col:1, row:4}, Ca: {col:2, row:4}, Sc: {col:3, row:4}, Ti: {col:4, row:4}, V: {col:5, row:4}, Cr: {col:6, row:4}, Mn: {col:7, row:4},
-    Fe: {col:8, row:4}, Co: {col:9, row:4}, Ni: {col:10, row:4}, Cu: {col:11, row:4}, Zn: {col:12, row:4},
-    Ga: {col:13, row:4}, Ge: {col:14, row:4}, As: {col:15, row:4}, Se: {col:16, row:4}, Br: {col:17, row:4}, Kr: {col:18, row:4},
-    Rb: {col:1, row:5}, Sr: {col:2, row:5}, Ag: {col:11, row:5}, Sn: {col:14, row:5}, I: {col:17, row:5}, Xe: {col:18, row:5},
-    Cs: {col:1, row:6}, Ba: {col:2, row:6}, Au: {col:11, row:6}, Hg: {col:12, row:6}, Pb: {col:14, row:6},
-    U:  {col:3, row:7}
-  };
-
+  // Create empty grid cells first (7 periods × 18 groups)
   for (let row = 1; row <= 7; row++) {
     for (let col = 1; col <= 18; col++) {
       const empty = document.createElement('div');
       empty.className = 'element-empty';
       empty.style.gridColumn = col;
       empty.style.gridRow = row;
+      empty.setAttribute('aria-hidden', 'true');
       table.appendChild(empty);
     }
   }
 
+  // Place elements using their group/period when available, with fallback map for specials
+  const specialPositions = {
+    H:  {col:1, row:1}, He: {col:18, row:1},
+    // Lanthanides / Actinides would go in separate rows in a full table; we keep main body simple
+  };
+
   ELEMENTS.forEach(el => {
-    const pos = positions[el.symbol];
-    if (!pos) return;
+    let col = el.group;
+    let row = el.period;
+    if (specialPositions[el.symbol]) {
+      col = specialPositions[el.symbol].col;
+      row = specialPositions[el.symbol].row;
+    }
+    // Skip if no valid position (incomplete dataset)
+    if (!col || !row || col < 1 || col > 18 || row < 1 || row > 7) return;
+
     const cell = document.createElement('div');
     cell.className = `element ${el.category}`;
     cell.dataset.symbol = el.symbol;
-    cell.style.gridColumn = pos.col;
-    cell.style.gridRow = pos.row;
+    cell.style.gridColumn = col;
+    cell.style.gridRow = row;
+    cell.setAttribute('role', 'button');
+    cell.setAttribute('tabindex', '0');
+    cell.setAttribute('aria-label', `${el.name}, atomic number ${el.num}`);
     cell.innerHTML = `<span class="number">${el.num}</span><span class="symbol">${el.symbol}</span><span class="mass">${el.mass.toFixed(1)}</span>`;
     cell.addEventListener('click', () => showElementDetail(el));
     cell.addEventListener('mouseenter', () => showElementDetail(el));
+    cell.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showElementDetail(el);
+      }
+    });
     table.appendChild(cell);
   });
 
@@ -115,7 +131,7 @@ function showElementDetail(el) {
   const detail = document.getElementById('element-detail');
   detail.innerHTML = `
     <div class="detail-header">
-      <div class="detail-symbol ${el.category}">${el.symbol}</div>
+      <div class="detail-symbol ${el.category}" aria-hidden="true">${el.symbol}</div>
       <div>
         <div class="detail-name">${el.name}</div>
         <div style="color:var(--text-muted);font-size:0.9rem;">${CATEGORIES[el.category] || el.category}</div>
@@ -147,7 +163,15 @@ function initSimulator() {
     item.className = 'reactant-item';
     item.textContent = r.label;
     item.dataset.id = r.id;
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
     item.addEventListener('click', () => addToChamber(r.id, r.label));
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        addToChamber(r.id, r.label);
+      }
+    });
     list.appendChild(item);
   });
 
@@ -171,6 +195,7 @@ function addToChamber(id, label) {
     selectedReactants[1] = id;
     updateSlot(1, label);
   } else {
+    // Replace second reactant
     selectedReactants[1] = id;
     updateSlot(1, label);
   }
@@ -197,10 +222,11 @@ function clearChamber() {
 
 function runReaction() {
   const [a, b] = selectedReactants;
+  // Order-independent matching
   const match = REACTIONS.find(r => {
     const set = new Set(r.reactants);
-    return set.has(a) && set.has(b);
-  });
+    return set.has(a) && set.has(b) && r.reactants.length === 2;
+  }) || REACTIONS.find(r => r.reactants.length === 1 && (r.reactants[0] === a || r.reactants[0] === b));
 
   const resultEl = document.getElementById('reaction-result');
   document.getElementById('result-modes').style.display = 'flex';
@@ -211,7 +237,7 @@ function runReaction() {
     addXP(15);
   } else {
     currentReaction = null;
-    resultEl.innerHTML = `<div class="result-content"><h3>No Significant Reaction</h3><p>Under normal laboratory conditions, <strong>${a}</strong> and <strong>${b}</strong> do not react readily, or the combination is not in the current database.</p></div>`;
+    resultEl.innerHTML = `<div class="result-content"><h3>No Significant Reaction</h3><p>Under normal laboratory conditions, <strong>${a}</strong> and <strong>${b}</strong> do not react readily, or the combination is not yet in the database.</p><p style="margin-top:0.5rem;font-size:0.9rem;color:var(--text-muted);">Try classic pairs such as HCl + NaOH, Zn + HCl, or AgNO₃ + NaCl.</p></div>`;
   }
 }
 
@@ -262,8 +288,16 @@ function initLessons() {
   MODULES.forEach(m => {
     const card = document.createElement('div');
     card.className = 'module-card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
     card.innerHTML = `<h3>${m.title}</h3><p>${m.desc}</p><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>`;
     card.addEventListener('click', () => openModule(m));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModule(m);
+      }
+    });
     grid.appendChild(card);
   });
 }
@@ -279,12 +313,13 @@ function openModule(m) {
         ${m.content}
       </div>
       <p style="margin-top:1.25rem; font-size:0.9rem; color:var(--text-muted);">
-        <strong>Next steps:</strong> Try the Reaction Simulator and Tools. Worked examples and practice questions will be added in future updates.
+        <strong>Next steps:</strong> Try the Reaction Simulator and Tools. Worked examples and practice questions coming in future updates.
       </p>
       <button class="secondary-btn" style="margin-top:1rem;" onclick="document.getElementById('lesson-content').style.display='none'">Close</button>
     </div>
   `;
   content.scrollIntoView({ behavior: 'smooth' });
+  addXP(8);
 }
 
 const GLOSSARY = [
@@ -299,7 +334,10 @@ const GLOSSARY = [
   { term: "Catalyst", def: "A substance that increases the rate of a reaction without being consumed itself." },
   { term: "Equilibrium", def: "A state in which the forward and reverse reaction rates are equal and concentrations remain constant." },
   { term: "Precipitate", def: "An insoluble solid that forms when two aqueous solutions are mixed." },
-  { term: "Stoichiometry", def: "The quantitative relationship between reactants and products in a chemical reaction." }
+  { term: "Stoichiometry", def: "The quantitative relationship between reactants and products in a chemical reaction." },
+  { term: "Enthalpy", def: "A thermodynamic quantity equivalent to the total heat content of a system at constant pressure." },
+  { term: "Entropy", def: "A measure of the disorder or randomness of a system." },
+  { term: "Buffer", def: "A solution that resists changes in pH when small amounts of acid or base are added." }
 ];
 
 function initGlossary() {
