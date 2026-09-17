@@ -142,6 +142,16 @@
               <p id="dilution-result" class="result-text" aria-live="polite"></p>
             </div>
           </div>
+          <div class="tool-card">
+            <h3>Live Compound Lookup (PubChem)</h3>
+            <div class="tool-form">
+              <label>Name or formula
+                <input type="text" id="pubchem-query" placeholder="e.g. caffeine, H2SO4, glucose" style="width:100%">
+              </label>
+              <button onclick="searchPubChem()" class="primary-btn">Search PubChem</button>
+              <div id="pubchem-result" style="margin-top:0.75rem;"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -161,6 +171,7 @@
 
   <script src="js/elements-data.js"></script>
   <script src="js/reactions-data.js"></script>
+  <script src="js/diagrams-bridge.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
