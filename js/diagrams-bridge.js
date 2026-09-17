@@ -1,5 +1,6 @@
 // Enhanced Dot-and-Cross diagrams (SVG) for the educational ChemLab
 // Friendly colours suitable for secondary school students
+// Falls back to the original ionic builder when no SVG is available
 
 function _c(cx, cy, r, stroke="#4f46e5") {
   return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${stroke}" stroke-width="2.5"/>`;
