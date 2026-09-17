@@ -1,177 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ChemLab — Interactive Chemistry Learning Platform</title>
-  <meta name="description" content="Free interactive chemistry learning platform: periodic table, reaction simulator with any element, dot-and-cross diagrams, calculators, long-form lessons and glossary." />
-  <meta name="theme-color" content="#4f46e5" />
-  <meta name="keywords" content="chemistry, periodic table, reaction simulator, dot and cross, molarity, stoichiometry, e-learning, A-level chemistry" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChemLab — Advanced Virtual Chemistry Laboratory</title>
+  <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div id="app">
-    <header class="header" role="banner">
+  <div class="app">
+    <header class="header">
       <div class="logo">
-        <span class="logo-icon" aria-hidden="true">⚗</span>
-        <span class="logo-text">ChemLab</span>
-      </div>
-      <nav class="nav" role="navigation" aria-label="Main">
-        <button class="nav-btn active" data-section="periodic" aria-current="page">Periodic Table</button>
-        <button class="nav-btn" data-section="simulator">Reaction Simulator</button>
-        <button class="nav-btn" data-section="lessons">Lessons</button>
-        <button class="nav-btn" data-section="tools">Tools</button>
-        <button class="nav-btn" data-section="glossary">Glossary</button>
-      </nav>
-      <div class="header-actions">
-        <button id="theme-toggle" class="icon-btn" title="Toggle dark/light mode" aria-label="Toggle dark or light mode">🌓</button>
-        <div class="xp-display" title="Your XP" aria-live="polite">
-          <span aria-hidden="true">⭐</span> <span id="xp-value">0</span> XP
+        <span class="logo-icon">⚗️</span>
+        <div>
+          <h1>ChemLab</h1>
+          <p class="tagline">Advanced Virtual Chemistry Laboratory</p>
         </div>
+      </div>
+      <div class="header-status">
+        <span class="status-dot"></span>
+        <span>Live PubChem + Local Reaction Engine</span>
       </div>
     </header>
 
-    <main class="main" role="main">
-      <section id="section-periodic" class="section active" aria-labelledby="periodic-heading">
-        <div class="section-header">
-          <h1 id="periodic-heading">Interactive Periodic Table</h1>
-          <div class="controls">
-            <input type="text" id="element-search" placeholder="Search element..." class="search-input" aria-label="Search elements by name, symbol or number" />
-            <select id="category-filter" class="select" aria-label="Filter by category">
-              <option value="all">All Categories</option>
-              <option value="alkali-metal">Alkali Metals</option>
-              <option value="alkaline-earth">Alkaline Earth</option>
-              <option value="transition-metal">Transition Metals</option>
-              <option value="post-transition">Post-Transition</option>
-              <option value="metalloid">Metalloids</option>
-              <option value="nonmetal">Nonmetals</option>
-              <option value="halogen">Halogens</option>
-              <option value="noble-gas">Noble Gases</option>
-            </select>
-          </div>
-        </div>
-        <div class="periodic-layout">
-          <div id="periodic-table" class="periodic-table" role="grid" aria-label="Periodic table of elements"></div>
-          <div id="element-detail" class="element-detail" aria-live="polite">
-            <div class="detail-placeholder"><p>Click or hover an element to see details</p></div>
-          </div>
-        </div>
-        <div class="legend" id="category-legend" aria-label="Category legend"></div>
-      </section>
+    <nav class="tabs">
+      <button class="tab active" data-tab="search">Compound Search</button>
+      <button class="tab" data-tab="reactions">Reactions</button>
+      <button class="tab" data-tab="diagrams">Dot & Cross Diagrams</button>
+      <button class="tab" data-tab="mixer">Reaction Mixer</button>
+      <button class="tab" data-tab="about">About & Sources</button>
+    </nav>
 
-      <section id="section-simulator" class="section" aria-labelledby="sim-heading">
-        <div class="section-header">
-          <h1 id="sim-heading">Reaction Simulator</h1>
-          <p class="subtitle">Choose any element or compound — run the reaction and explore equation, observation, visual and <strong>dot-and-cross</strong> views</p>
+    <main class="content">
+      <section id="search" class="panel active">
+        <div class="panel-header">
+          <h2>Compound Search</h2>
+          <p>Query PubChem (100M+ compounds) in real time. Enter a common name, formula, or CID.</p>
         </div>
-        <div class="simulator-layout">
-          <div class="reactant-picker">
-            <h3>Choose Reactants</h3>
-            <input type="text" id="reactant-search" placeholder="Search any element or compound..." class="search-input" style="width:100%;margin-bottom:0.75rem;" aria-label="Search reactants" />
-            <div class="reactant-list" id="reactant-list" role="listbox" aria-label="Reactant list"></div>
-          </div>
-          <div class="reaction-chamber">
-            <h3>Reaction Chamber</h3>
-            <div class="chamber-slots" id="chamber-slots">
-              <div class="slot" data-slot="0" aria-label="First reactant slot">Select first reactant</div>
-              <div class="plus" aria-hidden="true">+</div>
-              <div class="slot" data-slot="1" aria-label="Second reactant slot">Select second reactant</div>
-            </div>
-            <button id="run-reaction" class="primary-btn" disabled>Run Reaction</button>
-            <button id="clear-chamber" class="secondary-btn">Clear</button>
-          </div>
-          <div class="reaction-result" id="reaction-result" aria-live="polite">
-            <div class="result-placeholder"><p>Select two reactants and click Run Reaction</p></div>
-          </div>
+        <div class="search-box">
+          <input type="text" id="compoundQuery" placeholder="e.g. water, H2SO4, caffeine, 2244..." autocomplete="off">
+          <button id="searchBtn" class="btn primary">Search</button>
         </div>
-        <div class="mode-tabs" id="result-modes" style="display:none;" role="tablist">
-          <button class="mode-btn active" data-mode="equation" role="tab">Equation</button>
-          <button class="mode-btn" data-mode="realworld" role="tab">Real-World</button>
-          <button class="mode-btn" data-mode="visual" role="tab">Visual</button>
-          <button class="mode-btn" data-mode="dotcross" role="tab">Dot & Cross</button>
+        <div id="searchStatus" class="status-msg"></div>
+        <div id="compoundResult" class="result-card hidden"></div>
+        <div class="quick-links">
+          <span>Quick:</span>
+          <button class="chip" data-q="water">Water</button>
+          <button class="chip" data-q="sodium chloride">NaCl</button>
+          <button class="chip" data-q="sulfuric acid">H₂SO₄</button>
+          <button class="chip" data-q="glucose">Glucose</button>
+          <button class="chip" data-q="ethanol">Ethanol</button>
+          <button class="chip" data-q="ammonia">Ammonia</button>
+          <button class="chip" data-q="carbon dioxide">CO₂</button>
+          <button class="chip" data-q="methane">Methane</button>
         </div>
       </section>
 
-      <section id="section-lessons" class="section" aria-labelledby="lessons-heading">
-        <div class="section-header">
-          <h1 id="lessons-heading">Structured Lessons</h1>
-          <p class="subtitle">In-depth modules — longer explanations, key ideas and worked examples</p>
+      <section id="reactions" class="panel">
+        <div class="panel-header">
+          <h2>Reaction Database</h2>
+          <p>Search or browse common reactions. Data expands via local engine + PubChem compound lookup.</p>
         </div>
-        <div class="modules-grid" id="modules-grid"></div>
-        <div id="lesson-content" class="lesson-content" style="display:none;"></div>
+        <div class="search-box">
+          <input type="text" id="reactionQuery" placeholder="Search by reactant, product or type (e.g. acid base, NaOH, combustion)...">
+          <button id="reactionSearchBtn" class="btn primary">Search</button>
+        </div>
+        <div class="filters">
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="acid-base">Acid-Base</button>
+          <button class="filter-chip" data-filter="redox">Redox</button>
+          <button class="filter-chip" data-filter="precipitation">Precipitation</button>
+          <button class="filter-chip" data-filter="synthesis">Synthesis</button>
+          <button class="filter-chip" data-filter="decomposition">Decomposition</button>
+          <button class="filter-chip" data-filter="combustion">Combustion</button>
+          <button class="filter-chip" data-filter="organic">Organic</button>
+        </div>
+        <div id="reactionList" class="reaction-grid"></div>
       </section>
 
-      <section id="section-tools" class="section" aria-labelledby="tools-heading">
-        <div class="section-header"><h1 id="tools-heading">Handy Chemistry Tools</h1></div>
-        <div class="tools-grid">
-          <div class="tool-card">
-            <h3>Molarity Calculator</h3>
-            <div class="tool-form">
-              <label>Moles of solute <input type="number" id="mol-solute" step="any" inputmode="decimal"></label>
-              <label>Volume (L) <input type="number" id="vol-solution" step="any" inputmode="decimal"></label>
-              <button onclick="calcMolarity()" class="primary-btn">Calculate</button>
-              <p id="molarity-result" class="result-text" aria-live="polite"></p>
-            </div>
-          </div>
-          <div class="tool-card">
-            <h3>Stoichiometry Helper</h3>
-            <div class="tool-form">
-              <label>Mass (g) <input type="number" id="stoich-mass" step="any" inputmode="decimal"></label>
-              <label>Molar Mass (g/mol) <input type="number" id="stoich-mm" step="any" inputmode="decimal"></label>
-              <button onclick="calcMoles()" class="primary-btn">Grams → Moles</button>
-              <p id="stoich-result" class="result-text" aria-live="polite"></p>
-            </div>
-          </div>
-          <div class="tool-card">
-            <h3>Unit Converter</h3>
-            <div class="tool-form">
-              <label>Temperature (°C) <input type="number" id="temp-c" step="any" inputmode="decimal"></label>
-              <button onclick="convertTemp()" class="primary-btn">Convert to K & °F</button>
-              <p id="temp-result" class="result-text" aria-live="polite"></p>
-            </div>
-          </div>
-          <div class="tool-card">
-            <h3>Dilution Calculator (C₁V₁ = C₂V₂)</h3>
-            <div class="tool-form">
-              <label>C₁ <input type="number" id="c1" step="any" inputmode="decimal"></label>
-              <label>V₁ <input type="number" id="v1" step="any" inputmode="decimal"></label>
-              <label>C₂ <input type="number" id="c2" step="any" inputmode="decimal"></label>
-              <button onclick="calcDilution()" class="primary-btn">Find V₂</button>
-              <p id="dilution-result" class="result-text" aria-live="polite"></p>
-            </div>
-          </div>
-          <div class="tool-card">
-            <h3>Live Compound Lookup (PubChem)</h3>
-            <div class="tool-form">
-              <label>Name or formula
-                <input type="text" id="pubchem-query" placeholder="e.g. caffeine, H2SO4, glucose" style="width:100%">
-              </label>
-              <button onclick="searchPubChem()" class="primary-btn">Search PubChem</button>
-              <div id="pubchem-result" style="margin-top:0.75rem;"></div>
-            </div>
-          </div>
+      <section id="diagrams" class="panel">
+        <div class="panel-header">
+          <h2>Dot & Cross Diagrams</h2>
+          <p>Generate Lewis-style electron diagrams for common molecules and ions. Select or type a species.</p>
         </div>
+        <div class="diagram-controls">
+          <select id="diagramSelect">
+            <option value="">— Select molecule / ion —</option>
+            <optgroup label="Covalent Molecules">
+              <option value="H2">H₂ (Hydrogen)</option>
+              <option value="O2">O₂ (Oxygen)</option>
+              <option value="N2">N₂ (Nitrogen)</option>
+              <option value="Cl2">Cl₂ (Chlorine)</option>
+              <option value="H2O">H₂O (Water)</option>
+              <option value="NH3">NH₃ (Ammonia)</option>
+              <option value="CH4">CH₄ (Methane)</option>
+              <option value="CO2">CO₂ (Carbon Dioxide)</option>
+              <option value="HCl">HCl (Hydrogen Chloride)</option>
+              <option value="H2S">H₂S (Hydrogen Sulfide)</option>
+              <option value="C2H4">C₂H₄ (Ethene)</option>
+              <option value="C2H2">C₂H₂ (Ethyne)</option>
+            </optgroup>
+            <optgroup label="Ionic Compounds">
+              <option value="NaCl">NaCl (Sodium Chloride)</option>
+              <option value="MgO">MgO (Magnesium Oxide)</option>
+              <option value="CaCl2">CaCl₂ (Calcium Chloride)</option>
+              <option value="Na2O">Na₂O (Sodium Oxide)</option>
+            </optgroup>
+            <optgroup label="Ions">
+              <option value="NH4+">NH₄⁺ (Ammonium)</option>
+              <option value="OH-">OH⁻ (Hydroxide)</option>
+              <option value="SO42-">SO₄²⁻ (Sulfate)</option>
+            </optgroup>
+          </select>
+          <button id="drawDiagramBtn" class="btn primary">Generate Diagram</button>
+        </div>
+        <div id="diagramOutput" class="diagram-area">
+          <p class="placeholder">Select a species and click Generate to draw the dot-and-cross diagram.</p>
+        </div>
+        <div id="diagramInfo" class="diagram-info hidden"></div>
       </section>
 
-      <section id="section-glossary" class="section" aria-labelledby="glossary-heading">
-        <div class="section-header">
-          <h1 id="glossary-heading">Chemistry Glossary</h1>
-          <input type="text" id="glossary-search" placeholder="Search terms..." class="search-input" aria-label="Search glossary" />
+      <section id="mixer" class="panel">
+        <div class="panel-header">
+          <h2>Reaction Mixer</h2>
+          <p>Enter two or more reactants. The engine checks the local reaction database and suggests possible products / equations.</p>
         </div>
-        <div id="glossary-list" class="glossary-list"></div>
+        <div class="mixer-inputs">
+          <div class="input-group">
+            <label>Reactant 1</label>
+            <input type="text" id="reactant1" placeholder="e.g. HCl">
+          </div>
+          <div class="plus">+</div>
+          <div class="input-group">
+            <label>Reactant 2</label>
+            <input type="text" id="reactant2" placeholder="e.g. NaOH">
+          </div>
+          <div class="plus">+</div>
+          <div class="input-group">
+            <label>Reactant 3 (optional)</label>
+            <input type="text" id="reactant3" placeholder="optional">
+          </div>
+        </div>
+        <button id="mixBtn" class="btn primary">Predict / Find Reaction</button>
+        <div id="mixerResult" class="result-card hidden"></div>
+      </section>
+
+      <section id="about" class="panel">
+        <div class="panel-header">
+          <h2>About ChemLab</h2>
+        </div>
+        <div class="about-content">
+          <p>This is an expanded, fully operational virtual chemistry laboratory.</p>
+          <h3>Data Sources (Free & Open)</h3>
+          <ul>
+            <li><strong>PubChem</strong> (NCBI) — Live compound data via PUG-REST API (100M+ substances).</li>
+            <li><strong>Local Reaction Engine</strong> — Curated common reactions spanning acid-base, redox, precipitation, synthesis, decomposition, combustion and selected organic reactions. Expandable.</li>
+            <li><strong>Open Reaction Database (ORD)</strong> — Recommended for large-scale organic reaction data: <a href="https://open-reaction-database.org" target="_blank" rel="noopener">open-reaction-database.org</a></li>
+            <li>Dot-and-cross diagrams generated programmatically from valence electron rules.</li>
+          </ul>
+          <h3>Capabilities</h3>
+          <ul>
+            <li>Real-time compound lookup (formula, weight, SMILES, IUPAC…)</li>
+            <li>Searchable reaction database with type filters</li>
+            <li>Interactive Lewis / dot-and-cross diagram generation</li>
+            <li>Reactant mixer that matches against known equations</li>
+          </ul>
+          <p class="note">Internet required for PubChem queries. Diagrams and local reactions work offline.</p>
+        </div>
       </section>
     </main>
 
-    <footer class="footer" role="contentinfo">
-      <p>ChemLab — Interactive Chemistry Platform • Built for learning • Safety first • Simulation only</p>
+    <footer class="footer">
+      <span>ChemLab v2.0 — Expanded Database • Live PubChem • Dot & Cross Engine</span>
     </footer>
   </div>
 
-  <script src="js/elements-data.js"></script>
-  <script src="js/reactions-data.js"></script>
-  <script src="js/diagrams-bridge.js"></script>
-  <script src="js/app.js"></script>
+  <script src="reactions.js"></script>
+  <script src="diagrams.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
