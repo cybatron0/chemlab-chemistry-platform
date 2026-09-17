@@ -77,39 +77,6 @@ const REACTIONS = [
     visual: "H–H and O=O bonds break; new O–H bonds form in water molecules."
   },
   {
-    id: "fe-o2",
-    reactants: ["Fe", "O2"],
-    products: ["Fe2O3"],
-    equation: "4 Fe(s) + 3 O₂(g) → 2 Fe₂O₃(s)",
-    type: "Synthesis / Oxidation",
-    explanation: "Iron reacts with oxygen (often in presence of water) to form iron(III) oxide — rust.",
-    realWorld: "Reddish-brown flaky rust forms slowly on iron surfaces exposed to air and moisture.",
-    safety: "Generally slow at room temperature. Fine iron powder can be pyrophoric.",
-    visual: "Iron atoms oxidize; oxygen reduces. Oxide layer forms on the metal surface."
-  },
-  {
-    id: "cu-agno3",
-    reactants: ["Cu", "AgNO3"],
-    products: ["CuNO3", "Ag"],
-    equation: "Cu(s) + 2 AgNO₃(aq) → Cu(NO₃)₂(aq) + 2 Ag(s)",
-    type: "Single Displacement / Redox",
-    explanation: "Copper is more reactive than silver and displaces it from silver nitrate solution.",
-    realWorld: "Silver crystals or grey coating form on the copper surface. Solution turns blue.",
-    safety: "Silver nitrate is toxic and staining.",
-    visual: "Cu atoms oxidize to Cu²⁺; Ag⁺ ions reduce to metallic silver."
-  },
-  {
-    id: "h2so4-naoh",
-    reactants: ["H2SO4", "NaOH"],
-    products: ["Na2SO4", "H2O"],
-    equation: "H₂SO₄(aq) + 2 NaOH(aq) → Na₂SO₄(aq) + 2 H₂O(l)",
-    type: "Acid-Base Neutralization",
-    explanation: "Sulfuric acid is neutralized by sodium hydroxide.",
-    realWorld: "Significant heat released. Used in titration with indicators.",
-    safety: "Both reagents are highly corrosive. Always add acid to water, never reverse.",
-    visual: "H⁺ ions combine with OH⁻ to form water; Na⁺ and SO₄²⁻ form the salt."
-  },
-  {
     id: "mg-o2",
     reactants: ["Mg", "O2"],
     products: ["MgO"],
@@ -141,83 +108,6 @@ const REACTIONS = [
     realWorld: "Fizzing / effervescence as CO₂ is evolved. Solid dissolves.",
     safety: "Acid is corrosive. CO₂ is an asphyxiant in high concentration.",
     visual: "Carbonate ions react with H⁺ to form H₂CO₃ which decomposes to CO₂ + H₂O."
-  },
-  {
-    id: "fe-hcl",
-    reactants: ["Fe", "HCl"],
-    products: ["FeCl2", "H2"],
-    equation: "Fe(s) + 2 HCl(aq) → FeCl₂(aq) + H₂(g)",
-    type: "Single Displacement / Redox",
-    explanation: "Iron displaces hydrogen from hydrochloric acid.",
-    realWorld: "Bubbles of hydrogen; solution turns pale green (Fe²⁺).",
-    safety: "Hydrogen is flammable. Acid is corrosive.",
-    visual: "Fe → Fe²⁺ + 2e⁻; 2H⁺ + 2e⁻ → H₂."
-  },
-  {
-    id: "cuo-h2",
-    reactants: ["CuO", "H2"],
-    products: ["Cu", "H2O"],
-    equation: "CuO(s) + H₂(g) → Cu(s) + H₂O(g)",
-    type: "Redox / Reduction",
-    explanation: "Hydrogen reduces copper(II) oxide to copper metal.",
-    realWorld: "Black CuO turns to reddish-brown copper; steam is produced.",
-    safety: "Hydrogen is flammable. Perform with care.",
-    visual: "Oxygen is removed from CuO; copper ions are reduced to atoms."
-  },
-  {
-    id: "nh3-hcl",
-    reactants: ["NH3", "HCl"],
-    products: ["NH4Cl"],
-    equation: "NH₃(g) + HCl(g) → NH₄Cl(s)",
-    type: "Acid-Base / Synthesis",
-    explanation: "Ammonia and hydrogen chloride gases combine to form solid ammonium chloride.",
-    realWorld: "White smoke / solid ring of NH₄Cl forms where the gases meet (classic diffusion demo).",
-    safety: "Both gases are irritant. Perform in fume cupboard or with care.",
-    visual: "NH₃ accepts a proton from HCl forming the ionic salt NH₄⁺Cl⁻."
-  },
-  {
-    id: "k-h2o",
-    reactants: ["K", "H2O"],
-    products: ["KOH", "H2"],
-    equation: "2 K(s) + 2 H₂O(l) → 2 KOH(aq) + H₂(g)",
-    type: "Single Displacement / Redox",
-    explanation: "Potassium reacts even more vigorously than sodium with water.",
-    realWorld: "Lilac flame as hydrogen ignites; metal moves rapidly on surface.",
-    safety: "Very vigorous and hazardous. Use only under specialist supervision with tiny amounts.",
-    visual: "K atoms oxidize readily; water is reduced to H₂."
-  },
-  {
-    id: "al-hcl",
-    reactants: ["Al", "HCl"],
-    products: ["AlCl3", "H2"],
-    equation: "2 Al(s) + 6 HCl(aq) → 2 AlCl₃(aq) + 3 H₂(g)",
-    type: "Single Displacement / Redox",
-    explanation: "Aluminium reacts with hydrochloric acid to liberate hydrogen.",
-    realWorld: "Bubbles form after an induction period (oxide layer). Solution may warm.",
-    safety: "Hydrogen is flammable. Acid is corrosive.",
-    visual: "Al → Al³⁺ + 3e⁻; H⁺ reduced to H₂."
-  },
-  {
-    id: "pbno3-ki",
-    reactants: ["PbNO3", "KI"],
-    products: ["PbI2", "KNO3"],
-    equation: "Pb(NO₃)₂(aq) + 2 KI(aq) → PbI₂(s) + 2 KNO₃(aq)",
-    type: "Double Displacement / Precipitation",
-    explanation: "Lead(II) ions and iodide ions form bright yellow lead(II) iodide precipitate.",
-    realWorld: "Striking yellow precipitate (known as golden rain when recrystallised).",
-    safety: "Lead compounds are toxic. Avoid contact and dispose of properly.",
-    visual: "Pb²⁺ and I⁻ form the insoluble yellow solid PbI₂."
-  },
-  {
-    id: "h2so4-caco3",
-    reactants: ["H2SO4", "CaCO3"],
-    products: ["CaSO4", "CO2", "H2O"],
-    equation: "H₂SO₄(aq) + CaCO₃(s) → CaSO₄(s) + CO₂(g) + H₂O(l)",
-    type: "Acid-Carbonate",
-    explanation: "Sulfuric acid reacts with calcium carbonate producing sparingly soluble calcium sulfate.",
-    realWorld: "Initial fizzing; reaction may slow as CaSO₄ coats the carbonate.",
-    safety: "Concentrated H₂SO₄ is extremely corrosive. Dilute carefully.",
-    visual: "Carbonate + acid → salt + CO₂ + water."
   },
   {
     id: "ba-so4",
@@ -308,39 +198,6 @@ const REACTIONS = [
     visual: "–OH from acid and –H from alcohol eliminated as water; ester linkage forms."
   },
   {
-    id: "ethene-hydration",
-    reactants: ["C2H4", "H2O"],
-    products: ["C2H5OH"],
-    equation: "C₂H₄(g) + H₂O(g) → C₂H₅OH(g)",
-    type: "Organic (Addition / Hydration)",
-    explanation: "Industrial production of ethanol by hydration of ethene.",
-    realWorld: "Major industrial route to ethanol.",
-    safety: "High temperature/pressure process.",
-    visual: "π-bond of ethene opens; H and OH add across the double bond."
-  },
-  {
-    id: "methane-chlorination",
-    reactants: ["CH4", "Cl2"],
-    products: ["CH3Cl", "HCl"],
-    equation: "CH₄ + Cl₂ → CH₃Cl + HCl",
-    type: "Organic (Free-radical Substitution)",
-    explanation: "UV-initiated free-radical chlorination of methane.",
-    realWorld: "First step in a mixture of chloromethanes.",
-    safety: "Chlorine is toxic; UV light required.",
-    visual: "Homolytic cleavage of Cl–Cl; radical chain reaction."
-  },
-  {
-    id: "so3-h2o",
-    reactants: ["SO3", "H2O"],
-    products: ["H2SO4"],
-    equation: "SO₃(g) + H₂O(l) → H₂SO₄(aq)",
-    type: "Synthesis / Acid Formation",
-    explanation: "Sulfur trioxide reacts with water to form sulfuric acid (Contact process final stage).",
-    realWorld: "Highly exothermic; industrial production of H₂SO₄.",
-    safety: "SO₃ and concentrated H₂SO₄ are extremely corrosive.",
-    visual: "SO₃ accepts water to form the acid."
-  },
-  {
     id: "mg-hcl",
     reactants: ["Mg", "HCl"],
     products: ["MgCl2", "H2"],
@@ -407,7 +264,5 @@ const REACTANT_OPTIONS = [
   { id: "H2O2", label: "Hydrogen peroxide (H₂O₂)" },
   { id: "C2H5OH", label: "Ethanol (C₂H₅OH)" },
   { id: "CH3COOH", label: "Ethanoic acid (CH₃COOH)" },
-  { id: "C2H4", label: "Ethene (C₂H₄)" },
-  { id: "SO3", label: "Sulfur trioxide (SO₃)" },
   { id: "NaHCO3", label: "Sodium hydrogen carbonate (NaHCO₃)" }
 ];
